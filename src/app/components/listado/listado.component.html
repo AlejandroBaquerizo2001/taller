@@ -1,0 +1,57 @@
+<p>listado works!</p>
+
+<div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+  
+          <th scope="col">Id</th>
+          <th scope="col">Libro</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Genero</th>
+          <th scope="col">Estado</th>
+          <th>
+            <button routerLink="/agregarLibro/" type="submit" class="btn btn-primary btn-sm">Agregar
+                <i class="bi bi-person-plus-fill"></i>
+            </button>
+        </th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        @for (elem of listadoLibros; track elem) {
+        <tr>
+  
+          <td>{{elem.id}}</td>
+          <td>{{elem.nombre}}</td>
+          <td>{{elem.autor?.nombre}}</td>
+          <td>{{elem.genero?.nombre}}</td>
+          
+          @if(elem.estado==1){
+            <td>Activo</td>
+          }@else{
+            <td>Eliminado</td>
+          }
+
+          <td>
+            <span class="cursor text-primary">
+                <i routerLink="/verLibro/{{elem.id}}" class="bi bi-search"></i>
+            </span>
+
+            <span class="cursor text-success">
+                <i routerLink="/editarLibro/{{elem.id}}" class="bi bi-pencil-square"></i>
+            </span>
+           
+
+            <span class="cursor text-danger" (click)="eliminarLibro(elem.id)">
+                <i class="bi bi-file-earmark-x-fill"></i>
+            </span>
+          </td>
+
+          
+        </tr>
+        }
+  
+      </tbody>
+    </table>
+  </div>
